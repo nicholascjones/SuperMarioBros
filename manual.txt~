@@ -1,0 +1,95 @@
+//Super Mario Bros
+//Tallis Bowers, Breanna Devore-McDonald, nicholascjones, Riley Reuvers
+//User Manual
+
+
+
+- General Report:
+	
+	*User Perspective:
+		From the user's perspective, this game is relatively simple. For more detail, look forward
+		under the "Controls and Instructions" section. This game is a sidescrolling platformer in
+		which the user plays as Mario, an Italian Plumber, and must defeat a series of enemies in
+		advancing towards the end of the level, which he reaches by walking, running, and jumping
+		towards the right side of the map. He can only do this through user control, and with the
+		help of an incredible leaping ability, a few conveniently (or inconveniently) placed bricks,
+		and mushrooms with magical powers. Upon either dying or beating the level, the user is given
+		a visual message from the program.
+
+	*Programmer's Perspective:
+		From a programmer's perspective, this game takes a highly object-oriented approach to making
+		a game from scratch with only the help of the included SDL2 graphics library and a series of
+		sprite images, credit to an online user at arik239.deviantart.com. First, we started by creating
+		a main function, in which we include the majority of our SDL graphics functions, which access a number
+		of variables assigned in the Level class. The Level class utilizes composition to include nearly every
+		other class in the game, most notably the Sprite class (the player sprite), the Goomba and Turtle classes
+		(both of which are derived from the abstract class Enemy), the Scenery class, the Block class, and the Mushroom
+		class, all of which are included as protected data members under level and interact in a number of different ways.
+		The Level class includes the functions that drive the program itself. The playLevel() function is a driver within
+		the level class that loops through a series of commands (notably, the other functions which will be discussed)
+		under the conditions that the game is still running. The display() function loops through every different sprite
+		on the screen, and given its various attributes and coordinates, displays the appropriate SDL surfaces in the
+		assigned areas and takes the program data to screen. The checksMario() and checksEnemy() functions work similarly,
+		in which they both look to the position of the various sprites on the screen and based on the positions, they
+		determine whether Mario is being touched on the side and taking damage, or if the enemies are being touched
+		on the top and taking damage. The final function in the Level class is the scrollScreen() function, which uses
+		a pixel offset to scroll the contents with respect to the background and make it appear as if the screen itself is
+		moving with Mario. In the Sprite class, Mario has a few main functions; notably, he has move and jump functions
+		the latter of which functions with respect to an SDL timer that gives him the ability to nearly fly. His class
+		also includes a grow and a shrink function that allow him to interact with mushrooms, giving him an additional
+		hit point. The Block class primarily focuses on a function isOn(), a bool value which allows it to determine
+		whether or not Mario is standing on top of it and as such holds him up. The Mushroom object is similar in that
+		it has a function to determine whether or not it is touched, and if it is, to change Mario's sprite and give him
+		an additional hit point. Scenery is simply a primarily constructor-based class in which given coordinates draw
+		clouds in order to spice up the map. The Goomba class and Turtle class are primarily the same, apart from the fact
+		that turtle has an additional state in which it is hit once, and it must stay in the shell and loses the ability to
+		activate its move function. The Level class terminates when Mario is either killed or reaches the end line, upon
+		which events the while loop terminates, and one of two appropriate messages is given to the user, signaling the
+		game's end. 
+
+	*Testing
+		As one would likely guess, our group performed the testing of this project through a sickeningly large amount of
+		playing our own game, to the point of it not being fun to us whatsoever anymore. Throughout the process, we
+		were forced to strategically play the game to try to get certain outcomes, one example being trying to kill
+		enemies and then seeing if their invisible "remnants" could still cause us damage as a result of the coordinates,
+		and another outcome being to see what happened with multiple enemies colliding. We performed secondary testing
+		by commenting out plenty of lines of code and trying to use cause and effect to pinpoint early bugs (and even late
+		bugs, see "Known Bugs") and their effects on the program.
+
+-Special Library Inclusion:
+	For this project, as far as special downloads needed, one must include the SDL2 library for graphics
+	in order to build our game.
+
+-Instructions for Building and Compiling Program:
+	In order to compile our program, one must download all of the files from our our Github repository 
+	(https://github.com/bdevorem/FinalProject), and use the "make" command, which utilizes the Makefile we
+	created for the purposes of this project.
+
+-Controls and Instructions:
+	To play this game, the controls are relatively simple. The left and right arrow keys on the keyboard
+	allow the user to move left and right respectively, and the up arrow allows the user to jump in the air;
+	while in the air, they can move slowly left and right with the arrow keys as well. The main objective of
+	the game is for Mario (the protagonist) to move rightwards across the screen and make it to the end of
+	the level, which is the goal. Mario is opposed in his journey by a series of antagonists who, if they touch
+	him from the side, will kill him. In order to defeat these enemies, he must jump on them; the Goombas are
+	subject to death after one bounce, whereas it takes one bounce to send the Koopa into his shell, and a second
+	bounce to finish him off. If Mario gets a mushroom, he changes color and is able to take a hit of damage from
+	an enemy without dying. Lastly, Mario is able to land upon the brick blocks as platforms if need be.
+
+-Known Bugs:
+	* If a monster is randomly placed within a block obstacle, it will think that it is trapped between two walls
+		and continue to oscillate back and forth as if bounded by them.
+	* Sprites are rectangular in nature and in some cases, cause overlap over background or other sprites, particularly
+		the cloud sprites in the sky. This causes for some odd visual effects.
+	* Collisions between the enemies and each other, as well as obstacles, do not necessarily come into effect all of
+		the time; sometimes, the collision does not actually occur. We decided to let this remain in the game due
+		to the fact that it makes the game less predictable and moderately more challenging.
+	* Despite efforts to fix it, enemies still spawn between the end of level stairway and the flag. We decided to not
+		work towards changing this as the enemies in this location are not relevant and simply serve as scenery.
+
+Link:
+	Github Repo: https://github.com/bdevorem/FinalProject
+	TimeLog is the pasted Excel chart containing our time contributions,
+	MeetingLog is the pasted Word doc containing writeups of any multi-person face-to-face meeting. All other
+		project time was contributed while working alone, the vast majority of the work.
+	
